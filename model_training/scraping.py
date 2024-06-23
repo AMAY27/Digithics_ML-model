@@ -182,4 +182,25 @@ def delete_files_in_scraped_data():
         return 'Not deleted'
 
    
+def delete_file_with_id(file_id):
+    script_directory = os.path.dirname(__file__)
+    scraped_data_directory = os.path.join(script_directory, 'scraped_data')
+
+    # Check if the directory exists
+    if not os.path.exists(scraped_data_directory):
+        print(f"The directory '{scraped_data_directory}' does not exist.")
+        return 'Directory not found'
+
+    # Construct the file name and path
+    file_name = f"{file_id}.csv"  # Adjust the file extension as needed
+    file_path = os.path.join(scraped_data_directory, file_name)
+
+    # Check if the file exists
+    if os.path.isfile(file_path):
+        os.remove(file_path)
+        print(f"Deleted file: {file_path}")
+        return 'Deleted'
+    else:
+        print(f"No file with ID '{file_id}' exists in the directory.")
+        return 'File not found'
     
