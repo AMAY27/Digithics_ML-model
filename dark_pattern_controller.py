@@ -12,10 +12,10 @@ def create_dark_pattern_model():
     return dark_pattern_service.create_model()
 
 
-@dark_pattern.route('/<string:website_id>', methods=['POST'])
+@dark_pattern.route('/patternCheck', methods=['POST'])
 @cross_origin()
-def parse_website_for_dark_pattern_detection(website_id):
-    return dark_pattern_service.parse_website_url(website_id, params=request.json)
+def parse_website_for_dark_pattern_detection():
+   return dark_pattern_service.parse_website_url(params=request.json)
 
 
 @dark_pattern.route('/freeCheck', methods=['GET'])

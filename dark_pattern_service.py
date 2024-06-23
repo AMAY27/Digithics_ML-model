@@ -1,6 +1,6 @@
 from model_training.dark_pattern_model_train import get_csv_file_path, predict_website_dark_pattern_type, \
     create_dark_pattern_detection_model
-from model_training.scraping import web_scrap
+from model_training.scraping import web_scrap, delete_file_with_id
 from flask import jsonify
 import pandas as pd
 import random
@@ -13,14 +13,15 @@ def create_model():
     return 'Successfully model created', 200
 
 
-def parse_website_url(website_id, params):
+def parse_website_url(params):
     print('Parsing website')
     website_url = params['websiteUrl']
-
+    website_id = generate_random_id()
     web_scrap(website_url, website_id)
 
     dark_patterns = predict_website_dark_pattern_type(website_id)
     dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
+    delete_file_with_id(website_id)
 
     return jsonify(dark_patterns)
 
