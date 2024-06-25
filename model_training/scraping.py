@@ -26,7 +26,9 @@ def get_driver(url):
         # Running using chrome driver
         print('using chrome driver')
         driver = webdriver.Chrome(options=chrome_options)
+    print('Fetching the driver', url)
     driver.get(url)
+    print('Driver fetched')
     return driver
 
 
